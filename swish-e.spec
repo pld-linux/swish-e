@@ -101,16 +101,16 @@ SWISH-E documentation and examples
 %description doc -l pl
 Dokumentacja i przyk³ady dla SWISH-E
 
-%package   perl
+%package perl
 Summary:	SWISH-E - Perl Scripts and Modules
 Summary(pl):	SWISH-E - Skrypty i modu³y dla Perla
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 
-%description    perl
+%description perl
 Perl SWISH-E language bindings and scripts.
 
-%description    perl  -l pl
+%description perl -l pl
 Skrypty i modu³y perlowe dla SWISH-E.
 
 %package devel
@@ -175,7 +175,7 @@ cd ..
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
