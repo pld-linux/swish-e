@@ -15,7 +15,7 @@ BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Swish-e is Simple Web Indexing System for Humans - Enhanced
+Swish-e is Simple Web Indexing System for Humans - Enhanced.
 
 Swish-e can quickly and easily index directories of files or remote
 web sites and search the generated indexes.
@@ -51,16 +51,16 @@ Swish-e key features are:
   SWISH-E Discussion.
 
 %description -l pl
-Swish-e jest prostym systemem indeksuj±cym www dla ludzi - wersja
-rozszerzona.
+Swish-e jest prostym systemem indeksuj±cym WWW dla ludzi - w wersji
+rozszerzonej.
 
 Swish-e mo¿e zgrabnie i ³atwo indeksowaæ katalogi plików lub zdalne
-strony www i przeszukiwaæ wygenerowane indeksy.
+strony WWW i przeszukiwaæ wygenerowane indeksy.
 
 Swish-e jest ekstremalnie szybki zarówno w indeksowaniu i
 wyszukiwaniu, mocno konfigurowalny, i mo¿e byæ ³atwo zintegrowany z
-istrnij±cymi stronami www w celu konfiguracji jego wygl±du. Swish-e
-mo¿e indeksowaæ nie tylko strony www, ale tak¿e pliki tekstowe,
+istniej±cymi stronami WWW w celu konfiguracji jego wygl±du. Swish-e
+mo¿e indeksowaæ nie tylko strony WWW, ale tak¿e pliki tekstowe,
 archiwa list pocztowych lub dane przechowywane w relacyjnych bazach
 danych.
 
@@ -72,21 +72,21 @@ Kluczowymi w³a¶ciwo¶ciami swish-a s±:
   stopieñ mo¿liwo¶ci okre¶lenia co i jak ma byæ indeksowane.
 - Potê¿ny - operatory AND, OR i NOT s± obs³ugiwane, s³owa mog± byæ
   obcinane(korzystaj±c z *), i wyszukiwanie ograniczane do konkretnych
-  pól(tagi META, tytu³y, itepe)
+  pól (znaczniki META, tytu³y itp.)
 - Wolny - bezp³atny, darmowy, za friko.
 - Stworzony dla stron WWW - indeksuje pliki HTML, mo¿e ignorowaæ dane
-  w wiêkszo¶ci tagów, przyznaj±c wiêksz± wagê informacj± w nag³ówkach i
-  tytu³ach. Tytu³y mog± byæ wyodrêbniane z plików HTML i pojawiaæ siê w
-  rezultatach wyszukiwania. SWISH mo¿e automatycznie przeszukaæ ca³±
-  stronê WWW w jednym przej¶ciu, je¿eli jest w jednym katalogu. Mo¿na
-  tak¿e ograniczyæ wyszukiwanie do s³ów w tytu³ach HTML, komentarzach i
-  tagach META. Dodatkowo - 8-bitowe znaki HTML mog± byæ indeksowane,
-  przekszta³cane i przeszukiwane.
+  w wiêkszo¶ci znaczników, przyznaj±c wiêksz± wagê informacj± w
+  nag³ówkach i tytu³ach. Tytu³y mog± byæ wyodrêbniane z plików HTML i
+  pojawiaæ siê w rezultatach wyszukiwania. SWISH mo¿e automatycznie
+  przeszukaæ ca³± stronê WWW w jednym przej¶ciu, je¿eli jest w jednym
+  katalogu. Mo¿na tak¿e ograniczyæ wyszukiwanie do s³ów w tytu³ach
+  HTML, komentarzach i znacznikach META. Dodatkowo - 8-bitowe znaki
+  HTML mog± byæ indeksowane, przekszta³cane i przeszukiwane.
 - Tworzy przeno¶ne indeksy - s± zawarte w tylko jednym pliku, wiêc
   mog± byæ ³atwo transportowane i zarz±dzane.
-- Mo¿esz poprawiæ ¼ród³a - wszyscy s± proszeni o wysy³anie patchy i
-  uwag jak ulepszyæ SWISH-E. Mo¿esz siê te¿ przy³±czyæ do dyskusji na
-  temat SWISH-E.
+- Mo¿na poprawiæ ¼ród³a - wszyscy s± proszeni o wysy³anie ³at i uwag
+  jak ulepszyæ SWISH-E. Mo¿na siê te¿ przy³±czyæ do dyskusji na temat
+  SWISH-E.
 
 %package doc
 Summary:	Documentation for swish-e
@@ -160,7 +160,7 @@ rm -r $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}
-%attr(755,root,root) %{_libdir}/libswish-e.so.*
+%attr(755,root,root) %{_libdir}/libswish-e.so.*.*.*
 %dir %{_libdir}/swish-e
 %attr(755,root,root) %{_libdir}/swish-e/swishspider
 %{_mandir}/man?/*
@@ -179,9 +179,9 @@ rm -r $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*
 %attr(755,root,root) %{_libdir}/libswish-e.so
 %{_libdir}/libswish-e.la
+%{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
