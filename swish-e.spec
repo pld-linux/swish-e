@@ -102,13 +102,13 @@ SWISH-E documentation and examples
 Dokumentacja i przyk³ady dla SWISH-E
 
 %package   perl
-Summary:	SWISH-E - PERL Scripts and Modules
-Summary(pl):	SWISH-E - Skrypty i modu³y dla PERL-a
+Summary:	SWISH-E - Perl Scripts and Modules
+Summary(pl):	SWISH-E - Skrypty i modu³y dla Perla
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 
 %description    perl
-PERL SWISH-E language bindings and scripts.
+Perl SWISH-E language bindings and scripts.
 
 %description    perl  -l pl
 Skrypty i modu³y perlowe dla SWISH-E.
