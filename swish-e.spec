@@ -3,7 +3,7 @@ Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.2
-Release:	4.1
+Release:	5
 License:	GPL/LGPL
 Group:		Applications/Text
 Source0:	http://swish-e.org/Download/%{name}-%{version}.tar.gz
@@ -149,7 +149,6 @@ Biblioteka statyczna dla swish-e.
 cd perl
 echo | \
 %{__perl} Makefile.PL \
-	INSTALLDIRS=vendor \
 	CCFLAGS="%{rpmcflags} -I../src" \
 	LIBS="%{rpmldflags} -L../src/.libs -lswish-e"
 
@@ -196,12 +195,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/%{name}/*.pl
 %attr(755,root,root) %{_prefix}/lib/%{name}/*.cgi
 %{_datadir}/swish-e
-%dir %{perl_vendorarch}/SWISH
-%{perl_vendorarch}/SWISH/*.pm
-%dir %{perl_vendorarch}/auto/SWISH
-%dir %{perl_vendorarch}/auto/SWISH/API
-%{perl_vendorarch}/auto/SWISH/API/*.bs
-%attr(755,root,root) %{perl_vendorarch}/auto/SWISH/API/*.so
+%dir %{perl_sitearch}/SWISH
+%{perl_sitearch}/SWISH/*.pm
+%dir %{perl_sitearch}/auto/SWISH
+%dir %{perl_sitearch}/auto/SWISH/API
+%{perl_sitearch}/auto/SWISH/API/*.bs
+%attr(755,root,root) %{perl_sitearch}/auto/SWISH/API/*.so
 
 %files devel
 %defattr(644,root,root,755)
