@@ -2,7 +2,7 @@ Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.2
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		Applications/Text
 Source0:	http://swish-e.org/Download/%{name}-%{version}.tar.gz
@@ -146,6 +146,7 @@ Biblioteka statyczna dla swish-e.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -161,8 +162,8 @@ rm -r $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_libdir}/libswish-e.so.*.*.*
-%dir %{_libdir}/swish-e
-%attr(755,root,root) %{_libdir}/swish-e/swishspider
+%dir %{_prefix}/lib/swish-e
+%attr(755,root,root) %{_prefix}/lib/swish-e/swishspider
 %{_mandir}/man?/*
 
 %files doc
@@ -172,16 +173,16 @@ rm -r $RPM_BUILD_ROOT
 %files perl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/swish-filter-test
-%{_libdir}/%{name}/perl
-%attr(755,root,root) %{_libdir}/%{name}/*.pl
-%attr(755,root,root) %{_libdir}/%{name}/*.cgi
+%{_prefix}/lib/%{name}/perl
+%attr(755,root,root) %{_prefix}/lib/%{name}/*.pl
+%attr(755,root,root) %{_prefix}/lib/%{name}/*.cgi
 %{_datadir}/swish-e
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libswish-e.so
 %{_libdir}/libswish-e.la
-%{_includedir}/*
+%{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
