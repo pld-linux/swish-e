@@ -6,7 +6,7 @@ Version:	2.4.2
 Release:	7
 License:	GPL/LGPL
 Group:		Applications/Text
-Source0:	http://swish-e.org/Download/%{name}-%{version}.tar.gz
+Source0:	http://swish-e.org/download/%{name}-%{version}.tar.gz
 # Source0-md5:	1606e2f55034540f88c1748eeaae5274
 URL:		http://swish-e.org/
 #Icon:		swish-e.xpm
@@ -166,11 +166,9 @@ rm -rf $RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_docdir}/%{name} %{name}-doc
 
-cd perl
-%{__make} install \
+%{__make} -C perl install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=%{_prefix}
-cd ..
 
 %clean
 rm -rf $RPM_BUILD_ROOT
