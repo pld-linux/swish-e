@@ -1,8 +1,9 @@
+%include	/usr/lib/rpm/macros.perl
 Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.2
-Release:	4
+Release:	4.1
 License:	GPL/LGPL
 Group:		Applications/Text
 Source0:	http://swish-e.org/Download/%{name}-%{version}.tar.gz
@@ -11,6 +12,7 @@ URL:		http://swish-e.org/
 #Icon:		swish-e.xpm
 BuildRequires:	libxml2-devel
 BuildRequires:	pcre-devel
+BuildRequires:	rpm-perlprov
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -79,9 +81,9 @@ Kluczowymi w³a¶ciwo¶ciami swish-a s±:
   nag³ówkach i tytu³ach. Tytu³y mog± byæ wyodrêbniane z plików HTML i
   pojawiaæ siê w rezultatach wyszukiwania. SWISH mo¿e automatycznie
   przeszukaæ ca³± stronê WWW w jednym przej¶ciu, je¿eli jest w jednym
-  katalogu. Mo¿na tak¿e ograniczyæ wyszukiwanie do s³ów w tytu³ach
-  HTML, komentarzach i znacznikach META. Dodatkowo - 8-bitowe znaki
-  HTML mog± byæ indeksowane, przekszta³cane i przeszukiwane.
+  katalogu. Mo¿na tak¿e ograniczyæ wyszukiwanie do s³ów w tytu³ach HTML,
+  komentarzach i znacznikach META. Dodatkowo - 8-bitowe znaki HTML mog±
+  byæ indeksowane, przekszta³cane i przeszukiwane.
 - Tworzy przeno¶ne indeksy - s± zawarte w tylko jednym pliku, wiêc
   mog± byæ ³atwo transportowane i zarz±dzane.
 - Mo¿na poprawiæ ¼ród³a - wszyscy s± proszeni o wysy³anie ³at i uwag
@@ -144,6 +146,17 @@ Biblioteka statyczna dla swish-e.
 %{__make}
 %{__make} test
 
+cd perl
+echo | \
+%{__perl} Makefile.PL \
+	INSTALLDIRS=vendor \
+	CCFLAGS="%{rpmcflags} -I../src" \
+	LIBS="%{rpmldflags} -L../src/.libs -lswish-e"
+
+%{__make}
+%{__make} test
+cd ..
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -152,8 +165,14 @@ rm -rf $RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_docdir}/%{name} %{name}-doc
 
+cd perl
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix}
+cd ..
+
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -177,6 +196,12 @@ rm -r $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/%{name}/*.pl
 %attr(755,root,root) %{_prefix}/lib/%{name}/*.cgi
 %{_datadir}/swish-e
+%dir %{perl_vendorarch}/SWISH
+%{perl_vendorarch}/SWISH/*.pm
+%dir %{perl_vendorarch}/auto/SWISH
+%dir %{perl_vendorarch}/auto/SWISH/API
+%{perl_vendorarch}/auto/SWISH/API/*.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/SWISH/API/*.so
 
 %files devel
 %defattr(644,root,root,755)
