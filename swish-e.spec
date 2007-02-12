@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Simple Web Indexing System for Humans - Enhanced
-Summary(pl):	Prosty system indeksowania stron WWW - wersja rozszerzona
+Summary(pl.UTF-8):   Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.2
 Release:	7
@@ -52,89 +52,89 @@ Swish-e key features are:
   suggestions on how to make SWISH-E better. You may want to join the
   SWISH-E Discussion.
 
-%description -l pl
-Swish-e jest prostym systemem indeksuj±cym WWW dla ludzi - w wersji
+%description -l pl.UTF-8
+Swish-e jest prostym systemem indeksujÄ…cym WWW dla ludzi - w wersji
 rozszerzonej.
 
-Swish-e mo¿e zgrabnie i ³atwo indeksowaæ katalogi plików lub zdalne
-strony WWW i przeszukiwaæ wygenerowane indeksy.
+Swish-e moÅ¼e zgrabnie i Å‚atwo indeksowaÄ‡ katalogi plikÃ³w lub zdalne
+strony WWW i przeszukiwaÄ‡ wygenerowane indeksy.
 
-Swish-e jest ekstremalnie szybki zarówno w indeksowaniu i
-wyszukiwaniu, mocno konfigurowalny, i mo¿e byæ ³atwo zintegrowany z
-istniej±cymi stronami WWW w celu konfiguracji jego wygl±du. Swish-e
-mo¿e indeksowaæ nie tylko strony WWW, ale tak¿e pliki tekstowe,
+Swish-e jest ekstremalnie szybki zarÃ³wno w indeksowaniu i
+wyszukiwaniu, mocno konfigurowalny, i moÅ¼e byÄ‡ Å‚atwo zintegrowany z
+istniejÄ…cymi stronami WWW w celu konfiguracji jego wyglÄ…du. Swish-e
+moÅ¼e indeksowaÄ‡ nie tylko strony WWW, ale takÅ¼e pliki tekstowe,
 archiwa list pocztowych lub dane przechowywane w relacyjnych bazach
 danych.
 
-Kluczowymi w³a¶ciwo¶ciami swish-a s±:
-- Zgodne z Emacs/Gnus indeksowanie poczty w po³±czeniu z nnir.el
-- Szybki - wiele wspó³czynników ma wp³yw na prêdko¶æ, ale wyszukiwanie
-  na serwerze zwracaj±ce tysi±ce dokumentów zabiera tylko kilka sekund.
-- Elastyczny - du¿a liczba opcji konfiguracyjnych udostêpnia wysoki
-  stopieñ mo¿liwo¶ci okre¶lenia co i jak ma byæ indeksowane.
-- Potê¿ny - operatory AND, OR i NOT s± obs³ugiwane, s³owa mog± byæ
-  obcinane(korzystaj±c z *), i wyszukiwanie ograniczane do konkretnych
-  pól (znaczniki META, tytu³y itp.)
-- Wolny - bezp³atny, darmowy, za friko.
-- Stworzony dla stron WWW - indeksuje pliki HTML, mo¿e ignorowaæ dane
-  w wiêkszo¶ci znaczników, przyznaj±c wiêksz± wagê informacj± w
-  nag³ówkach i tytu³ach. Tytu³y mog± byæ wyodrêbniane z plików HTML i
-  pojawiaæ siê w rezultatach wyszukiwania. SWISH mo¿e automatycznie
-  przeszukaæ ca³± stronê WWW w jednym przej¶ciu, je¿eli jest w jednym
-  katalogu. Mo¿na tak¿e ograniczyæ wyszukiwanie do s³ów w tytu³ach HTML,
-  komentarzach i znacznikach META. Dodatkowo - 8-bitowe znaki HTML mog±
-  byæ indeksowane, przekszta³cane i przeszukiwane.
-- Tworzy przeno¶ne indeksy - s± zawarte w tylko jednym pliku, wiêc
-  mog± byæ ³atwo transportowane i zarz±dzane.
-- Mo¿na poprawiæ ¼ród³a - wszyscy s± proszeni o wysy³anie ³at i uwag
-  jak ulepszyæ SWISH-E. Mo¿na siê te¿ przy³±czyæ do dyskusji na temat
+Kluczowymi wÅ‚aÅ›ciwoÅ›ciami swish-a sÄ…:
+- Zgodne z Emacs/Gnus indeksowanie poczty w poÅ‚Ä…czeniu z nnir.el
+- Szybki - wiele wspÃ³Å‚czynnikÃ³w ma wpÅ‚yw na prÄ™dkoÅ›Ä‡, ale wyszukiwanie
+  na serwerze zwracajÄ…ce tysiÄ…ce dokumentÃ³w zabiera tylko kilka sekund.
+- Elastyczny - duÅ¼a liczba opcji konfiguracyjnych udostÄ™pnia wysoki
+  stopieÅ„ moÅ¼liwoÅ›ci okreÅ›lenia co i jak ma byÄ‡ indeksowane.
+- PotÄ™Å¼ny - operatory AND, OR i NOT sÄ… obsÅ‚ugiwane, sÅ‚owa mogÄ… byÄ‡
+  obcinane(korzystajÄ…c z *), i wyszukiwanie ograniczane do konkretnych
+  pÃ³l (znaczniki META, tytuÅ‚y itp.)
+- Wolny - bezpÅ‚atny, darmowy, za friko.
+- Stworzony dla stron WWW - indeksuje pliki HTML, moÅ¼e ignorowaÄ‡ dane
+  w wiÄ™kszoÅ›ci znacznikÃ³w, przyznajÄ…c wiÄ™kszÄ… wagÄ™ informacjÄ… w
+  nagÅ‚Ã³wkach i tytuÅ‚ach. TytuÅ‚y mogÄ… byÄ‡ wyodrÄ™bniane z plikÃ³w HTML i
+  pojawiaÄ‡ siÄ™ w rezultatach wyszukiwania. SWISH moÅ¼e automatycznie
+  przeszukaÄ‡ caÅ‚Ä… stronÄ™ WWW w jednym przejÅ›ciu, jeÅ¼eli jest w jednym
+  katalogu. MoÅ¼na takÅ¼e ograniczyÄ‡ wyszukiwanie do sÅ‚Ã³w w tytuÅ‚ach HTML,
+  komentarzach i znacznikach META. Dodatkowo - 8-bitowe znaki HTML mogÄ…
+  byÄ‡ indeksowane, przeksztaÅ‚cane i przeszukiwane.
+- Tworzy przenoÅ›ne indeksy - sÄ… zawarte w tylko jednym pliku, wiÄ™c
+  mogÄ… byÄ‡ Å‚atwo transportowane i zarzÄ…dzane.
+- MoÅ¼na poprawiÄ‡ ÅºrÃ³dÅ‚a - wszyscy sÄ… proszeni o wysyÅ‚anie Å‚at i uwag
+  jak ulepszyÄ‡ SWISH-E. MoÅ¼na siÄ™ teÅ¼ przyÅ‚Ä…czyÄ‡ do dyskusji na temat
   SWISH-E.
 
 %package doc
 Summary:	Documentation for swish-e
-Summary(pl):	Dokumentacja dla swish-e
+Summary(pl.UTF-8):   Dokumentacja dla swish-e
 Group:		Documentation
 
 %description doc
 SWISH-E documentation and examples
 
-%description doc -l pl
-Dokumentacja i przyk³ady dla SWISH-E
+%description doc -l pl.UTF-8
+Dokumentacja i przykÅ‚ady dla SWISH-E
 
 %package perl
 Summary:	SWISH-E - Perl Scripts and Modules
-Summary(pl):	SWISH-E - Skrypty i modu³y dla Perla
+Summary(pl.UTF-8):   SWISH-E - Skrypty i moduÅ‚y dla Perla
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 
 %description perl
 Perl SWISH-E language bindings and scripts.
 
-%description perl -l pl
-Skrypty i modu³y perlowe dla SWISH-E.
+%description perl -l pl.UTF-8
+Skrypty i moduÅ‚y perlowe dla SWISH-E.
 
 %package devel
 Summary:	Header files for swish-e
-Summary(pl):	Pliki nag³ówkowe dla swish-e
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe dla swish-e
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for swish-e.
 
-%description devel -l pl
-Pliki nag³ówkowe dla swish-e.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe dla swish-e.
 
 %package static
 Summary:	Static library for swish-e
-Summary(pl):	Biblioteka statyczna dla swish-e
+Summary(pl.UTF-8):   Biblioteka statyczna dla swish-e
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static library for swish-e.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna dla swish-e.
 
 %prep
