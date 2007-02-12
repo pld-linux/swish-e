@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Simple Web Indexing System for Humans - Enhanced
-Summary(pl.UTF-8):   Prosty system indeksowania stron WWW - wersja rozszerzona
+Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.2
 Release:	7
@@ -92,7 +92,7 @@ Kluczowymi właściwościami swish-a są:
 
 %package doc
 Summary:	Documentation for swish-e
-Summary(pl.UTF-8):   Dokumentacja dla swish-e
+Summary(pl.UTF-8):	Dokumentacja dla swish-e
 Group:		Documentation
 
 %description doc
@@ -103,7 +103,7 @@ Dokumentacja i przykłady dla SWISH-E
 
 %package perl
 Summary:	SWISH-E - Perl Scripts and Modules
-Summary(pl.UTF-8):   SWISH-E - Skrypty i moduły dla Perla
+Summary(pl.UTF-8):	SWISH-E - Skrypty i moduły dla Perla
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 
@@ -115,7 +115,7 @@ Skrypty i moduły perlowe dla SWISH-E.
 
 %package devel
 Summary:	Header files for swish-e
-Summary(pl.UTF-8):   Pliki nagłówkowe dla swish-e
+Summary(pl.UTF-8):	Pliki nagłówkowe dla swish-e
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -127,7 +127,7 @@ Pliki nagłówkowe dla swish-e.
 
 %package static
 Summary:	Static library for swish-e
-Summary(pl.UTF-8):   Biblioteka statyczna dla swish-e
+Summary(pl.UTF-8):	Biblioteka statyczna dla swish-e
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
