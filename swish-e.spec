@@ -2,12 +2,12 @@
 Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
-Version:	2.4.2
-Release:	7
+Version:	2.4.5
+Release:	1
 License:	GPL/LGPL
 Group:		Applications/Text
-Source0:	http://swish-e.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	1606e2f55034540f88c1748eeaae5274
+Source0:	http://swish-e.org/distribution/%{name}-%{version}.tar.gz
+# Source0-md5:	feae5ca1f5f4352190156b54a19c0153
 URL:		http://swish-e.org/
 #Icon:		swish-e.xpm
 BuildRequires:	libxml2-devel
@@ -151,11 +151,14 @@ echo skip | \
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor \
 	CCFLAGS="%{rpmcflags} -I../src" \
-	LIBS="%{rpmldflags} -L../src/.libs -lswish-e"
+	LIBS="%{rpmldflags} -L../src/.libs -lswish-e" \
+	SWISHINC=../src \
+	SWISHLIBS=-L../src/.libs \
+	SWISHVERSION=%{version} \
+	SWISHBINDIR=../src
 
 %{__make}
-# doesn't work when skip founding swish-e binary
-# %{__make} test
+%{__make} test
 cd ..
 
 %install
@@ -204,9 +207,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/swish-config
 %attr(755,root,root) %{_libdir}/libswish-e.so
 %{_libdir}/libswish-e.la
 %{_includedir}/*.h
+%{_pkgconfigdir}/*
 
 %files static
 %defattr(644,root,root,755)
