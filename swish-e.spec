@@ -3,7 +3,7 @@ Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.4.5
-Release:	4
+Release:	5
 License:	GPL/LGPL
 Group:		Applications/Text
 Source0:	http://swish-e.org/distribution/%{name}-%{version}.tar.gz
