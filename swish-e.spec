@@ -185,6 +185,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_libdir}/libswish-e.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libswish-e.so.2
 %dir %{_prefix}/lib/swish-e
 %attr(755,root,root) %{_prefix}/lib/swish-e/swishspider
 %{_mandir}/man?/*
