@@ -205,7 +205,6 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/SWISH/*.pm
 %dir %{perl_vendorarch}/auto/SWISH
 %dir %{perl_vendorarch}/auto/SWISH/API
-%{perl_vendorarch}/auto/SWISH/API/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/SWISH/API/*.so
 
 %files devel
