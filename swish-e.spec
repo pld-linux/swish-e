@@ -1,13 +1,16 @@
+%define		snap	2014-09-14
+%define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
 Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
-Version:	2.4.7
-Release:	1
+Version:	2.7.0
+Release:	0.%{snapver}.1
 License:	GPL/LGPL
 Group:		Applications/Text
-Source0:	http://swish-e.org/distribution/%{name}-%{version}.tar.gz
-# Source0-md5:	736db7a65aed48bb3e2587c52833642d
+#Source0:	http://swish-e.org/distribution/%{name}-%{version}.tar.gz
+Source0:	http://swish-e.org/swish-daily/%{name}-%{version}-%{snap}.tar.gz
+# Source0-md5:	c6b918413382ff61eb5e224c8b4c6f7d
 Patch0:		format-security.patch
 URL:		http://swish-e.org/
 #Icon:		swish-e.xpm
@@ -139,7 +142,7 @@ Static library for swish-e.
 Biblioteka statyczna dla swish-e.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{snap}
 %patch0 -p1
 
 %build
@@ -187,7 +190,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libswish-e.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libswish-e.so.2
 %dir %{_prefix}/lib/swish-e
-%attr(755,root,root) %{_prefix}/lib/swish-e/swishspider
 %{_mandir}/man?/*
 
 %files doc
