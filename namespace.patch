@@ -1,0 +1,30 @@
+--- swish-e-2.4.7.orig/perl/API.pm
++++ swish-e-2.4.7/perl/API.pm
+@@ -2,7 +2,7 @@
+ 
+ # $Id: API.pm 2499 2009-10-04 03:34:07Z karpet $
+ 
+-use vars qw/ @ISA $VERSION /;
++use vars qw/ @ISA $VERSION/;
+ 
+ $VERSION = '0.04_01';
+ 
+@@ -31,7 +31,17 @@
+     return $m;
+ }
+ 
+-CL: for my $class ( grep { m/::$/ } keys %SWISH::API:: )
++# Fix for Debian Bug #422609
++@moduleslist = ( 
++  "MetaName::",
++  "Search::",
++  "PropertyName::",
++  "Results::",
++  "FuzzyWord::",
++  "Result::",
++);
++
++CL: for my $class ( @moduleslist )
+ {
+     local *c = $SWISH::API::{$class};
+     METH: foreach my $meth ( keys %c ) {

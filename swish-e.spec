@@ -12,6 +12,7 @@ Group:		Applications/Text
 Source0:	http://swish-e.org/swish-daily/%{name}-%{version}-%{snap}.tar.gz
 # Source0-md5:	c6b918413382ff61eb5e224c8b4c6f7d
 Patch0:		format-security.patch
+Patch1:		namespace.patch
 URL:		http://swish-e.org/
 #Icon:		swish-e.xpm
 BuildRequires:	libxml2-devel
@@ -144,6 +145,7 @@ Biblioteka statyczna dla swish-e.
 %prep
 %setup -q -n %{name}-%{version}-%{snap}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
