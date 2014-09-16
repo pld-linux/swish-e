@@ -1,6 +1,7 @@
+#
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
-#
+
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
@@ -17,7 +18,6 @@ Source0:	http://swish-e.org/swish-daily/%{name}-%{version}-%{snap}.tar.gz
 Patch0:		format-security.patch
 Patch1:		namespace.patch
 URL:		http://swish-e.org/
-#Icon:		swish-e.xpm
 BuildRequires:	libxml2-devel
 BuildRequires:	pcre-devel
 BuildRequires:	rpm-perlprov
@@ -220,7 +220,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libswish-e.so
 %{_libdir}/libswish-e.la
 %{_includedir}/*.h
-%{_pkgconfigdir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
