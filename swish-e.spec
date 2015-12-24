@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
 
+%define		rel	3
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
@@ -9,7 +10,7 @@ Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
 Version:	2.7.0
-Release:	0.%{snapver}.2
+Release:	0.%{snapver}.%{rel}
 License:	GPL/LGPL
 Group:		Applications/Text
 #Source0:	http://swish-e.org/distribution/%{name}-%{version}.tar.gz
