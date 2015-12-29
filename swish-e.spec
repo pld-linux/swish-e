@@ -1,8 +1,8 @@
 #
 # Conditional build:
-%bcond_without	tests		# do not perform "make test"
+%bcond_with	tests		# do not perform "make test"
 
-%define		rel	4
+%define		rel	5
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
