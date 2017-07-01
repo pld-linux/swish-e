@@ -1,0 +1,393 @@
+diff -ur swish-e-2.7.0-2014-09-14/src/compress.c swish-e-2.7.0-2014-09-14.zlib/src/compress.c
+--- swish-e-2.7.0-2014-09-14/src/compress.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/compress.c	2017-07-01 10:52:31.160708484 +0200
+@@ -163,7 +163,7 @@
+ }
+ 
+ /* Uncompress a number from a file */
+-int     uncompress1(FILE * fp, int (*f_getc) (FILE *))
++int     sw_uncompress1(FILE * fp, int (*f_getc) (FILE *))
+ {
+     int     _c;
+     int     num = 0;
+@@ -175,7 +175,7 @@
+         _c = (int) f_getc(fp);
+         
+         if (_c < 0) {
+-             progerr("_c is < 0 in uncompress1()\n");
++             progerr("_c is < 0 in sw_uncompress1()\n");
+         }
+         
+         num <<= 7;
+@@ -193,7 +193,7 @@
+ 
+ /* same routine but this works with a memory forward buffer instead of file */
+ /* it also increases the buffer pointer */
+-int     uncompress2(unsigned char **buffer)
++int     sw_uncompress2(unsigned char **buffer)
+ {
+     int     _c;
+     int     num = 0;
+@@ -636,10 +636,10 @@
+     else
+         (*frequency) |= (*flag) & 15;   /* Binary 00001111 */
+ 
+-    *filenum = uncompress2(&p);
++    *filenum = sw_uncompress2(&p);
+ 
+     if(! (*frequency))
+-        *frequency = uncompress2(&p);
++        *frequency = sw_uncompress2(&p);
+ 
+     *buf = p;
+ }
+@@ -688,7 +688,7 @@
+         }
+ 
+         /* First position is always "as is" */
+-        posdata[0] = (unsigned int)uncompress2(&p);
++        posdata[0] = (unsigned int)sw_uncompress2(&p);
+ 
+         /* Check if positions where stored as two values per byte or the old "compress" style */
+         if(flag & POS_4_BIT)
+@@ -706,7 +706,7 @@
+         {
+             for (i = 1; i < frequency; i++)
+             {
+-                tmp = uncompress2(&p);
++                tmp = sw_uncompress2(&p);
+                 posdata[i] = (unsigned int)tmp;
+             }
+         }
+diff -ur swish-e-2.7.0-2014-09-14/src/compress.h swish-e-2.7.0-2014-09-14.zlib/src/compress.h
+--- swish-e-2.7.0-2014-09-14/src/compress.h	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/compress.h	2017-07-01 10:52:31.170708616 +0200
+@@ -35,8 +35,8 @@
+ /* unsigned char *compress2(int num, unsigned char *buffer);*/
+ unsigned char *compress3(int num, unsigned char *buffer);
+ 
+-int uncompress1(FILE *fp, int (*f_getc)(FILE *fp));
+-int uncompress2(unsigned char **buffer);
++int sw_uncompress1(FILE *fp, int (*f_getc)(FILE *fp));
++int sw_uncompress2(unsigned char **buffer);
+ 
+ 
+ unsigned long PACKLONG(unsigned long num);
+diff -ur swish-e-2.7.0-2014-09-14/src/db_native.c swish-e-2.7.0-2014-09-14.zlib/src/db_native.c
+--- swish-e-2.7.0-2014-09-14/src/db_native.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/db_native.c	2017-07-01 10:52:31.177375371 +0200
+@@ -725,11 +725,11 @@
+ FILE   *fp = SW_DB->fp_header;
+ int     tmp;
+ 
+-    tmp = uncompress1(fp, sw_fgetc);
++    tmp = sw_uncompress1(fp, sw_fgetc);
+     *id = tmp;
+     if (tmp)
+     {
+-        tmp = uncompress1(fp, sw_fgetc);
++        tmp = sw_uncompress1(fp, sw_fgetc);
+         *s = (unsigned char *) emalloc(tmp + 1);
+         *len = tmp;
+         int ret = sw_fread(*s, *len, sizeof(char), fp);
+@@ -1078,7 +1078,7 @@
+         buf = data.data;
+ 
+         /* Get saved_bytes and adjust data_size */
+-        *saved_bytes = uncompress2(&buf);
++        *saved_bytes = sw_uncompress2(&buf);
+         *data_size -= ((char *)buf - (char *)data.data);
+         *worddata = emalloc(*data_size);
+         memcpy(*worddata,buf, *data_size);
+@@ -1352,13 +1352,13 @@
+    next = readfileoffset(fp,sw_fread);
+ 
+    /* read propID for this record */
+-   id = uncompress1(fp,sw_fgetc);
++   id = sw_uncompress1(fp,sw_fgetc);
+ 
+    while(1)
+    {
+        if(id == propID)  /* this is the property we are looking for */
+        {
+-           tmp = uncompress1(fp,sw_fgetc);
++           tmp = sw_uncompress1(fp,sw_fgetc);
+            *sz_data = tmp;
+ 
+            *data = emalloc(*sz_data);
+@@ -1372,7 +1372,7 @@
+        {
+            sw_fseek(fp,next,SEEK_SET);
+            next = readfileoffset(fp,sw_fread);
+-           id = uncompress1(fp,sw_fgetc);
++           id = sw_uncompress1(fp,sw_fgetc);
+        }
+        else
+        {
+@@ -1750,10 +1750,10 @@
+ #endif
+ 
+     /* read compressed size (for use in zlib uncompression) */
+-    *buf_len = uncompress1( SW_DB->fp_prop, sw_fgetc );
++    *buf_len = sw_uncompress1( SW_DB->fp_prop, sw_fgetc );
+ 
+     /* Get the uncompressed size */
+-    saved_bytes = uncompress1( SW_DB->fp_prop, sw_fgetc );
++    saved_bytes = sw_uncompress1( SW_DB->fp_prop, sw_fgetc );
+ 
+     /* If saved_bytes is 0 there was not any compression */
+     if( !saved_bytes )             /* adjust *uncompressed_len */
+diff -ur swish-e-2.7.0-2014-09-14/src/db_read.c swish-e-2.7.0-2014-09-14.zlib/src/db_read.c
+--- swish-e-2.7.0-2014-09-14/src/db_read.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/db_read.c	2017-07-01 10:52:31.157375107 +0200
+@@ -253,24 +253,24 @@
+     /* First clear out the default metanames */
+     freeMetaEntries( header );
+ 
+-    num_metanames = uncompress2(&s);
++    num_metanames = sw_uncompress2(&s);
+ 
+     for (i = 0; i < num_metanames; i++)
+     {
+-        len = uncompress2(&s);
++        len = sw_uncompress2(&s);
+         word = emalloc(len +1);
+         memcpy(word,s,len); s += len;
+         word[len] = '\0';
+         /* Read metaID */
+-        metaID = uncompress2(&s);
++        metaID = sw_uncompress2(&s);
+         /* metaType was saved as metaType+1 */
+-        metaType = uncompress2(&s);
++        metaType = sw_uncompress2(&s);
+ 
+-        alias = uncompress2(&s) - 1;
++        alias = sw_uncompress2(&s) - 1;
+ 
+-        sort_len = uncompress2(&s);
++        sort_len = sw_uncompress2(&s);
+ 
+-        bias = uncompress2(&s) - RANK_BIAS_RANGE - 1;
++        bias = sw_uncompress2(&s) - RANK_BIAS_RANGE - 1;
+ 
+ 
+         /* add the meta tag */
+@@ -295,11 +295,11 @@
+ 
+     unsigned char   *s = (unsigned char *)buffer;
+ 
+-    num_words = uncompress2(&s);
++    num_words = sw_uncompress2(&s);
+     
+     for (i=0; i < num_words ; i++)   
+     {
+-        len = uncompress2(&s);
++        len = sw_uncompress2(&s);
+         word = emalloc(len+1);
+         memcpy(word,s,len); s += len;
+         word[len] = '\0';
+@@ -318,10 +318,10 @@
+     int     tmp,i;
+     unsigned char    *s = (unsigned char *)buffer;
+ 
+-    tmp = uncompress2(&s);   /* Jump the number of elements */
++    tmp = sw_uncompress2(&s);   /* Jump the number of elements */
+     for (i = 0; i < table_size; i++)
+     {
+-        tmp = uncompress2(&s); /* Gut all the elements */
++        tmp = sw_uncompress2(&s); /* Gut all the elements */
+         table[i] = tmp - 1;
+     }
+ }
+diff -ur swish-e-2.7.0-2014-09-14/src/db_write.c swish-e-2.7.0-2014-09-14.zlib/src/db_write.c
+--- swish-e-2.7.0-2014-09-14/src/db_write.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/db_write.c	2017-07-01 10:52:31.167375238 +0200
+@@ -207,7 +207,7 @@
+         /* Jump pointer to next element */
+         p = compressed_data + sizeof(LOCATION *);
+ 
+-        metaID = uncompress2(&p);
++        metaID = sw_uncompress2(&p);
+ 
+         memcpy((char *)&chunk_size,(char *)p,sizeof(chunk_size));
+         p += sizeof(chunk_size);
+diff -ur swish-e-2.7.0-2014-09-14/src/dump.c swish-e-2.7.0-2014-09-14.zlib/src/dump.c
+--- swish-e-2.7.0-2014-09-14/src/dump.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/dump.c	2017-07-01 10:52:31.194042257 +0200
+@@ -246,8 +246,8 @@
+             /* parse and print word's data */
+             s = worddata;
+ 
+-            tmpval = uncompress2(&s);     /* tfrequency */
+-            metaID = uncompress2(&s);     /* metaID */
++            tmpval = sw_uncompress2(&s);     /* tfrequency */
++            metaID = sw_uncompress2(&s);     /* metaID */
+ 
+             r_nextposmeta = UNPACKLONG2(s);
+             s += sizeof(long);
+@@ -276,7 +276,7 @@
+                 if ( metadata_length == (s - start))
+                 {
+                     filenum = 0;
+-                    metaID = uncompress2(&s);
++                    metaID = sw_uncompress2(&s);
+ 
+                     r_nextposmeta = UNPACKLONG2(s);
+                     s += sizeof(long);
+@@ -336,8 +336,8 @@
+             /* parse and print word's data */
+             s = worddata;
+ 
+-            tmpval = uncompress2(&s);     /* tfrequency */
+-            metaID = uncompress2(&s);     /* metaID */
++            tmpval = sw_uncompress2(&s);     /* tfrequency */
++            metaID = sw_uncompress2(&s);     /* metaID */
+ 
+             r_nextposmeta = UNPACKLONG2(s);
+             s += sizeof(long);
+@@ -438,7 +438,7 @@
+                 if ( metadata_length == (s - start))
+                 {
+                     filenum = 0;
+-                    metaID = uncompress2(&s);
++                    metaID = sw_uncompress2(&s);
+ 
+                     r_nextposmeta = UNPACKLONG2(s);
+                     s += sizeof(long);
+diff -ur swish-e-2.7.0-2014-09-14/src/index.c swish-e-2.7.0-2014-09-14.zlib/src/index.c
+--- swish-e-2.7.0-2014-09-14/src/index.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/index.c	2017-07-01 10:52:31.167375238 +0200
+@@ -1684,7 +1684,7 @@
+                  /* Jump pointer to next element */
+                  p = compressed_data + sizeof(LOCATION *);
+ 
+-                 metaID = uncompress2(&p);
++                 metaID = sw_uncompress2(&p);
+ 
+                  memcpy((char *)&chunk_size,(char *)p,sizeof(chunk_size));
+                  p += sizeof(chunk_size);
+@@ -1778,8 +1778,8 @@
+ 
+     p = worddata;
+ 
+-    tmpval = uncompress2(&p);     /* tfrequency */
+-    metaID = uncompress2(&p);     /* metaID */
++    tmpval = sw_uncompress2(&p);     /* tfrequency */
++    metaID = sw_uncompress2(&p);     /* metaID */
+     r_nextposmeta =  UNPACKLONG2(p); 
+     w_nextposmeta = p;
+     p += sizeof(long);
+@@ -1843,7 +1843,7 @@
+             if(q != p)
+                 PACKLONG2(q - worddata, w_nextposmeta);
+ 
+-            metaID = uncompress2(&p);
++            metaID = sw_uncompress2(&p);
+             q = compress3(metaID,q);
+ 
+             r_nextposmeta = UNPACKLONG2(p); 
+@@ -1971,7 +1971,7 @@
+         /* Jump next offset */
+         compressed_data += sizeof(LOCATION *);
+ 
+-        metaID = uncompress2(&compressed_data);
++        metaID = sw_uncompress2(&compressed_data);
+         uncompress_location_values(&compressed_data,&flag,&filenum,&frequency);
+         pi[0] = metaID;
+         pi[1] = filenum;
+@@ -2525,7 +2525,7 @@
+     for(tprev =NULL, tloc = e->allLocationList; tloc; )
+     {
+         tp = (unsigned char *)tloc + sizeof(void *);
+-        tmp = uncompress2(&tp); /* Read metaID */
++        tmp = sw_uncompress2(&tp); /* Read metaID */
+         if(tmp > metaID)
+              break;
+         tprev = tloc;
+@@ -2595,7 +2595,7 @@
+         p += sizeof(LOCATION *);
+ 
+         /* get metaID of LOCATION */
+-        metaID = uncompress2(&p);
++        metaID = sw_uncompress2(&p);
+ 
+         /* Check for new metaID */
+         if(metaID != curmetaID)
+@@ -2810,7 +2810,7 @@
+     }
+ 
+     fp = idx->fp_loc_read[idx_swap_file];
+-    while((lenbuf = uncompress1(fp, idx->swap_getc)))
++    while((lenbuf = sw_uncompress1(fp, idx->swap_getc)))
+     {
+         if(ep == NULL)
+         {
+@@ -2890,7 +2890,7 @@
+         /* Jump fileoffset */
+         compressed_data += sizeof(LOCATION *);
+ 
+-        metaID = uncompress2(&compressed_data);
++        metaID = sw_uncompress2(&compressed_data);
+         pi[0] = metaID;
+         pi[1] = i-k;
+         ptmp2 += 2 * sizeof(int);
+diff -ur swish-e-2.7.0-2014-09-14/src/merge.c swish-e-2.7.0-2014-09-14.zlib/src/merge.c
+--- swish-e-2.7.0-2014-09-14/src/merge.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/merge.c	2017-07-01 10:52:31.170708616 +0200
+@@ -225,8 +225,8 @@
+ 
+                             /* Now, parse word's data */
+                             s = worddata;
+-                            tmpval = uncompress2(&s);     /* tfrequency */
+-                            metaID = uncompress2(&s);     /* metaID */
++                            tmpval = sw_uncompress2(&s);     /* tfrequency */
++                            metaID = sw_uncompress2(&s);     /* metaID */
+ 
+                             if (metaID)
+                             {
+@@ -280,7 +280,7 @@
+                                 if ( metadata_length == (s - start))
+                                 {
+                                     filenum = 0;
+-                                    metaID = uncompress2(&s);
++                                    metaID = sw_uncompress2(&s);
+ 
+                                     r_nextposmeta = UNPACKLONG2(s);
+                                     s += sizeof(long);
+diff -ur swish-e-2.7.0-2014-09-14/src/result_sort.c swish-e-2.7.0-2014-09-14.zlib/src/result_sort.c
+--- swish-e-2.7.0-2014-09-14/src/result_sort.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/result_sort.c	2017-07-01 10:52:31.180708748 +0200
+@@ -252,7 +252,7 @@
+ 
+         /* Unpack / decompress the numbers */
+         for (j = 0; j < indexf->header.totalfiles; j++)
+-            m->sorted_data[j] = uncompress2(&s);
++            m->sorted_data[j] = sw_uncompress2(&s);
+ 
+         efree(buffer);
+     }
+diff -ur swish-e-2.7.0-2014-09-14/src/search.c swish-e-2.7.0-2014-09-14.zlib/src/search.c
+--- swish-e-2.7.0-2014-09-14/src/search.c	2014-09-15 02:01:51.000000000 +0200
++++ swish-e-2.7.0-2014-09-14.zlib/src/search.c	2017-07-01 10:52:31.160708484 +0200
+@@ -1729,10 +1729,10 @@
+            // buffer structure = <tfreq><metaID><delta to next meta>
+ 
+            /* Get the data of the word */
+-           tfrequency += uncompress2(&s); /* tfrequency - number of files with this word */
++           tfrequency += sw_uncompress2(&s); /* tfrequency - number of files with this word */
+ 
+            /* Now look for a correct Metaname */
+-           curmetaID = uncompress2(&s);
++           curmetaID = sw_uncompress2(&s);
+ 
+            while (curmetaID)
+            {
+@@ -1751,7 +1751,7 @@
+                if(s == (buffer + sz_buffer))
+                    break; /* exit if no more meta data */
+ 
+-               curmetaID = uncompress2(&s);
++               curmetaID = sw_uncompress2(&s);
+            }
+ 
+            if (curmetaID == metaID) /* found a matching meta value */

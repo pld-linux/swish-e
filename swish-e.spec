@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_with	tests		# do not perform "make test"
 
-%define		rel	8
+%define		rel	9
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
@@ -18,6 +18,7 @@ Source0:	http://swish-e.org/swish-daily/%{name}-%{version}-%{snap}.tar.gz
 # Source0-md5:	c6b918413382ff61eb5e224c8b4c6f7d
 Patch0:		format-security.patch
 Patch1:		namespace.patch
+Patch2:		zlib-clash.patch
 URL:		http://swish-e.org/
 BuildRequires:	libxml2-devel
 BuildRequires:	pcre-devel
@@ -150,6 +151,7 @@ Biblioteka statyczna dla swish-e.
 %setup -q -n %{name}-%{version}-%{snap}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure \
