@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_with	tests		# do not perform "make test"
 
-%define		rel	9
+%define		rel	10
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 %include	/usr/lib/rpm/macros.perl
