@@ -5,7 +5,6 @@
 %define		rel	11
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
-%include	/usr/lib/rpm/macros.perl
 Summary:	Simple Web Indexing System for Humans - Enhanced
 Summary(pl.UTF-8):	Prosty system indeksowania stron WWW - wersja rozszerzona
 Name:		swish-e
