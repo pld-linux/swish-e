@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_with	tests		# do not perform "make test"
 
-%define		rel	17
+%define		rel	18
 %define		snap	2014-09-14
 %define		snapver	%(echo %{snap} | tr -d '-')
 Summary:	Simple Web Indexing System for Humans - Enhanced
